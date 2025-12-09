@@ -1,6 +1,6 @@
-# ABC Learning Game
+# L&M's Playhall
 
-An educational game to help children learn the alphabet!
+L&M's Playhall - An educational game to help children learn the alphabet!
 
 ## Files in this project:
 - `index.html` - Main HTML file

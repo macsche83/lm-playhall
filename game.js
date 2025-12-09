@@ -50,7 +50,7 @@ function getRandomColor() {
 // Start screen
 scene("start", () => {
     add([
-        text("ABC Learning Game!", { size: 48 }),
+        text("L&M's Playhall", { size: 48 }),
         pos(width() / 2, height() / 2 - 100),
         anchor("center"),
         color(255, 255, 255),

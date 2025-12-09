@@ -1,7 +1,7 @@
 {
-  "name": "abc-game",
+  "name": "lm-playhall",
   "version": "1.0.0",
-  "description": "An educational game to help children learn the alphabet!",
+  "description": "L&M's Playhall - An educational game to help children learn the alphabet!",
   "main": "game.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
