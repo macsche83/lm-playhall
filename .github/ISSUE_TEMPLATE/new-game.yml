@@ -1,0 +1,100 @@
+name: 🎮 New Game
+description: Propose a new educational game for L&M's Playhall
+title: "[GAME] "
+labels: ["type: game", "stage: ideation"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for proposing a new game! Please fill out the details below.
+
+  - type: input
+    id: game-name
+    attributes:
+      label: Game Name
+      description: What should this game be called?
+      placeholder: "e.g., Number Catch"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: category
+    attributes:
+      label: Category
+      description: What type of game is this?
+      options:
+        - 📚 Learning
+        - 🎯 Focus
+        - 🧘 Relaxation
+    validations:
+      required: true
+
+  - type: input
+    id: target-age
+    attributes:
+      label: Target Age
+      description: What age group is this for?
+      placeholder: "e.g., 3-6 years"
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Game Description
+      description: Describe the game concept in 2-3 sentences
+      placeholder: "Players catch falling numbers that match a target number..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: learning-goals
+    attributes:
+      label: Learning Goals
+      description: What skills will this game teach?
+      placeholder: |
+        - Number recognition
+        - Counting
+        - Hand-eye coordination
+    validations:
+      required: true
+
+  - type: textarea
+    id: core-mechanic
+    attributes:
+      label: Core Mechanic
+      description: How does the game work?
+      placeholder: "Describe the main gameplay loop..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: win-condition
+    attributes:
+      label: Win Condition
+      description: How does a player succeed?
+      placeholder: "Catch 10 correct numbers to advance..."
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority
+      description: How important is this game?
+      options:
+        - 🔴 High
+        - 🟡 Medium
+        - 🟢 Low
+      default: 1
+
+  - type: textarea
+    id: similar-games
+    attributes:
+      label: Similar Games
+      description: Are there similar games in the project or elsewhere?
+      placeholder: "Similar to ABC Learning but with numbers..."
+
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: Additional Context
+      description: Any other information, mockups, or references?

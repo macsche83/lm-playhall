@@ -1,0 +1,95 @@
+name: ✨ Feature Request
+description: Suggest a new feature or enhancement
+title: "[FEATURE] "
+labels: ["type: feature", "stage: ideation"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for suggesting a feature! Please provide details below.
+
+  - type: input
+    id: feature-name
+    attributes:
+      label: Feature Name
+      description: Brief name for this feature
+      placeholder: "e.g., Difficulty Levels"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: feature-type
+    attributes:
+      label: Feature Type
+      description: What kind of feature is this?
+      options:
+        - Enhancement to existing game
+        - New launcher feature
+        - Infrastructure/tooling
+        - UI/UX improvement
+        - Performance optimization
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem Statement
+      description: What problem does this solve?
+      placeholder: "Users need to adjust difficulty but currently can't..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: Proposed Solution
+      description: How would you solve this?
+      placeholder: "Add Easy/Medium/Hard options in settings..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: user-story
+    attributes:
+      label: User Story
+      description: Describe from user's perspective
+      placeholder: "As a parent, I want to adjust difficulty so my child can start easy..."
+
+  - type: dropdown
+    id: affects
+    attributes:
+      label: Affects
+      description: What part of the project does this impact?
+      options:
+        - Specific game (specify in description)
+        - Game launcher
+        - All games
+        - Documentation
+        - Testing
+        - Infrastructure
+      multiple: true
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority
+      description: How important is this?
+      options:
+        - 🔴 High
+        - 🟡 Medium
+        - 🟢 Low
+      default: 1
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternative Solutions
+      description: Did you consider other approaches?
+
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: Additional Context
+      description: Screenshots, examples, or references
