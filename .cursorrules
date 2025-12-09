@@ -1,0 +1,215 @@
+# L&M's Playhall - Cursor Rules
+
+## Project Context
+
+This is L&M's Playhall, a collection of educational browser games for children to learn, focus, and relax. Read `.ai/context.md` for full project vision.
+
+## Architecture
+
+- Multi-game platform with central launcher
+- Each game is self-contained in `games/[name]/` directory
+- Built with Kaboom.js (no build step)
+- Deployed to GitHub Pages
+- See `.ai/architecture.md` for details
+
+## Code Style
+
+### JavaScript
+- Use ES6+ features (const/let, arrow functions, template literals)
+- 4-space indentation, semicolons required
+- camelCase for variables/functions
+- Descriptive names (no single letters except loop counters)
+- Follow patterns in existing games (`games/abc-learning/`)
+
+### Example
+```javascript
+// Good
+function getRandomLetter() {
+    const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    return letters[Math.floor(Math.random() * letters.length)];
+}
+
+// Avoid
+function grl() { return 'A'; }
+```
+
+### Kaboom.js Components
+```javascript
+// Standard order
+add([
+    text("Hello"),           // Display
+    pos(100, 100),          // Position
+    anchor("center"),       // Anchor
+    color(255, 255, 255),   // Color
+    area(),                 // Collision
+    body(),                 // Physics
+    "tag-name",             // Tags last
+]);
+```
+
+## Conventions
+
+Read `.ai/conventions.md` for full conventions. Key points:
+
+### File Structure
+- Games: `games/[name]/game.js`, `games/[name]/README.md`
+- Tests: `tests/games/[name]/test-*.js`
+- Docs: `docs/*.md`
+
+### Scene Structure
+```javascript
+scene("start", () => { /* Menu */ });
+scene("game", () => { /* Gameplay */ });
+scene("pause", () => { /* Pause */ });
+```
+
+### Comments
+- Comment the WHY, not the WHAT
+- Document complex logic
+- Note Kaboom.js quirks
+
+## Adding New Games
+
+1. Create `games/[name]/` directory
+2. Add `game.js` with standard structure
+3. Add `README.md` with documentation
+4. Update `launcher.js` to include game
+5. Create tests in `tests/games/[name]/`
+6. Update `docs/game-catalog.md`
+
+Use `.ai/prompts/new-game.md` template.
+
+## Testing
+
+- Run tests before committing
+- Create integration tests with Puppeteer
+- Take screenshots for visual verification
+- Test on mobile viewport (375x667)
+
+```bash
+python3 -m http.server 8080 &
+node tests/games/[name]/test-gameplay.js
+```
+
+## Git Commits
+
+Format:
+```
+<type>: <description>
+
+Details
+
+🤖 Generated with [Claude Code](https://claude.com/claude-code)
+
+Co-Authored-By: Claude <noreply@anthropic.com>
+```
+
+Types: feat, fix, docs, refactor, test, style, chore
+
+## Best Practices
+
+### Do
+- Follow existing patterns
+- Keep games self-contained
+- Test on mobile
+- Write descriptive commits
+- Use shared utilities where appropriate
+- Comment complex logic
+
+### Don't
+- Don't use var (use const/let)
+- Don't leave console.log() in production
+- Don't hardcode paths
+- Don't break existing games
+- Don't add build steps without discussion
+- Don't commit node_modules/ or *.png
+
+## Performance
+
+- Limit objects on screen (< 50)
+- Destroy off-screen objects
+- Maintain 60 FPS
+- Keep load time < 3 seconds
+
+```javascript
+// Clean up off-screen objects
+onUpdate(() => {
+    get('item').forEach(item => {
+        if (item.pos.y > height() + 100) {
+            destroy(item);
+        }
+    });
+});
+```
+
+## Mobile-First
+
+- Large touch targets (44x44px minimum)
+- Simple controls (tap/swipe)
+- Test in responsive mode
+- Readable text sizes
+
+## Prompt Templates
+
+When asking AI for help, use:
+- `.ai/prompts/new-game.md` - Adding games
+- `.ai/prompts/new-feature.md` - Adding features
+- `.ai/prompts/bug-fix.md` - Fixing bugs
+- `.ai/prompts/refactor.md` - Refactoring
+
+## Documentation
+
+- Always update docs when changing code
+- Keep README.md files current
+- Add examples for complex features
+- Document breaking changes
+
+## Resources
+
+- Architecture: `.ai/architecture.md` and `docs/architecture.md`
+- Conventions: `.ai/conventions.md`
+- Development: `docs/development.md`
+- Testing: `docs/testing.md`
+- Adding Games: `docs/adding-games.md`
+- Kaboom.js: https://kaboomjs.com/
+
+## Quick Reference
+
+```javascript
+// Basic game structure
+kaboom({
+    width: 800,
+    height: 600,
+    background: [135, 206, 235],
+    root: document.getElementById("game-container"),
+});
+
+scene("start", () => {
+    // Menu UI
+});
+
+scene("game", () => {
+    // Gameplay
+});
+
+go("start");
+```
+
+## AI Assistant Guidelines
+
+When assisting with this project:
+1. Read existing code before suggesting changes
+2. Follow established patterns
+3. Keep solutions simple (no over-engineering)
+4. Test changes thoroughly
+5. Update documentation
+6. Ask for clarification if unclear
+
+## Remember
+
+- Educational value is paramount
+- Code clarity over cleverness
+- Simplicity over complexity
+- Mobile-first design
+- Test before committing
+- Documentation is code

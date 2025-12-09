@@ -28,8 +28,8 @@ const puppeteer = require('puppeteer');
         console.log(`[ERROR]: ${error.message}`);
     });
 
-    console.log('Navigating to http://localhost:8080...');
-    await page.goto('http://localhost:8080', {
+    console.log('Navigating to http://localhost:8080/games/abc-learning/index.html...');
+    await page.goto('http://localhost:8080/games/abc-learning/index.html', {
         waitUntil: 'networkidle0',
         timeout: 10000
     });

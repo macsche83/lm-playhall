@@ -16,7 +16,7 @@ const puppeteer = require('puppeteer');
         console.log(`[ERROR]: ${error.message}`);
     });
 
-    await page.goto('http://localhost:8080', { waitUntil: 'networkidle0' });
+    await page.goto('http://localhost:8080/games/abc-learning/index.html', { waitUntil: 'networkidle0' });
 
     console.log('Clicking to start...');
     await page.click('body');

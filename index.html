@@ -3,30 +3,226 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>L&M's Playhall</title>
+    <title>L&M's Playhall - Learn, Focus, Relax</title>
     <style>
-        body {
+        * {
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: white;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .tagline {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .filters {
             display: flex;
             justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            font-family: 'Arial', sans-serif;
+            gap: 15px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
         }
-        #game-container {
-            box-shadow: 0 10px 50px rgba(0,0,0,0.3);
-            border-radius: 10px;
-            overflow: hidden;
+
+        .filter-btn {
+            padding: 10px 25px;
+            border: 2px solid white;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 1rem;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .filter-btn.active {
+            background: white;
+            color: #667eea;
+        }
+
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .game-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: #333;
+        }
+
+        .game-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+        }
+
+        .game-icon {
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .game-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #667eea;
+        }
+
+        .game-description {
+            font-size: 0.9rem;
+            color: #666;
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+
+        .game-category {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .category-learning {
+            background: #e3f2fd;
+            color: #1976d2;
+        }
+
+        .category-focus {
+            background: #fff3e0;
+            color: #f57c00;
+        }
+
+        .category-relaxation {
+            background: #f3e5f5;
+            color: #7b1fa2;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            opacity: 0.8;
+        }
+
+        .empty-state h2 {
+            font-size: 2rem;
+            margin-bottom: 15px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            opacity: 0.8;
+        }
+
+        footer a {
+            color: white;
+            text-decoration: underline;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .games-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .filter-btn {
+                font-size: 0.9rem;
+                padding: 8px 20px;
+            }
+        }
+
+        /* Coming soon badge */
+        .coming-soon {
+            opacity: 0.6;
+            position: relative;
+        }
+
+        .coming-soon::after {
+            content: "Coming Soon";
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #ff9800;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.7rem;
+            font-weight: bold;
         }
     </style>
 </head>
 <body>
-    <div id="game-container"></div>
-    
-    <!-- Load Kaboom.js from CDN -->
-    <script src="https://unpkg.com/kaboom@3000.0.1/dist/kaboom.js"></script>
-    <script src="game.js"></script>
+    <div class="container">
+        <header>
+            <h1>🎮 L&M's Playhall</h1>
+            <p class="tagline">Fun games to help you learn, focus, and relax</p>
+        </header>
+
+        <div class="filters">
+            <button class="filter-btn active" data-category="all">All Games</button>
+            <button class="filter-btn" data-category="learning">📚 Learning</button>
+            <button class="filter-btn" data-category="focus">🎯 Focus</button>
+            <button class="filter-btn" data-category="relaxation">🧘 Relaxation</button>
+        </div>
+
+        <div id="games-grid" class="games-grid">
+            <!-- Games will be dynamically loaded here -->
+        </div>
+
+        <div id="empty-state" class="empty-state" style="display: none;">
+            <h2>No games found</h2>
+            <p>Try selecting a different category</p>
+        </div>
+
+        <footer>
+            <p>Built with ❤️ for kids and families</p>
+            <p><a href="https://github.com/macsche83/lm-playhall" target="_blank">GitHub</a> | <a href="docs/game-catalog.md">Game Catalog</a></p>
+        </footer>
+    </div>
+
+    <script src="launcher.js"></script>
 </body>
 </html>

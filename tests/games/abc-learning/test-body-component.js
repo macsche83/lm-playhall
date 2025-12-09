@@ -11,7 +11,7 @@ const puppeteer = require('puppeteer');
     page.on('console', msg => console.log(`[BROWSER]:`, msg.text()));
     page.on('pageerror', error => console.log(`[ERROR]:`, error.message));
 
-    await page.goto('http://localhost:8080', { waitUntil: 'networkidle0' });
+    await page.goto('http://localhost:8080/games/abc-learning/index.html', { waitUntil: 'networkidle0' });
 
     // Test if body() works with text()
     const testResult = await page.evaluate(() => {
